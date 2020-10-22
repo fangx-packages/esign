@@ -1,0 +1,49 @@
+{
+    "name": "fangx/esign",
+    "description": "esign v2",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nfangxu",
+            "email": "nfangxu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^6.0",
+        "nesbot/carbon": "^2.41"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.50",
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fangx\\ESign\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fangx\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "cs-fix": "php-cs-fixer fix $1",
+        "test": "./vendor/bin/phpunit -c phpunit.xml --color=always"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fangx\\ESign\\ESignServiceProvider"
+            ],
+            "aliases": []
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
