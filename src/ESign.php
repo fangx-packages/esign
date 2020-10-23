@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Fangx\ESign;
 
-use Fangx\ESign\Api\FileTemplate;
+use Fangx\ESign\Contract\AccountApi;
 use Fangx\ESign\Contract\Client;
 use Fangx\ESign\Contract\FileTemplateApi;
 
 /**
  * Class ESign.
  *
- * //@method FileTemplateApi fileTemplateApi()
+ * @method FileTemplateApi fileTemplateApi()
+ * @method AccountApi account()
  */
 class ESign
 {
@@ -31,17 +32,13 @@ class ESign
         $this->client = $client;
     }
 
-//    public function __call($name, $arguments)
-//    {
-//        if (interface_exists($classname = '\\Fangx\\ESign\\Contract\\' . ucfirst($name))) {
-//            // 直接从 Laravel 容器中获取这个对象, 容器自动回实例化, 并实现对应的依赖注入
-//            return app($classname);
-//        }
-//
-//        throw new \Exception(sprintf('Call to undefined method [%s]', $name));
-//    }
-    public function fileTemplateApi()
+    public function __call($name, $arguments)
     {
-        return new FileTemplate($this->client);
+        if (interface_exists($classname = 'Fangx\\ESign\\Contract\\' . ucfirst($name))) {
+            // 直接从 Laravel 容器中获取这个对象, 容器自动回实例化, 并实现对应的依赖注入
+            return app($classname);
+        }
+
+        throw new \Exception(sprintf('Call to undefined method [%s]', $name));
     }
 }

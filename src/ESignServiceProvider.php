@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Fangx\ESign;
 
+use Fangx\ESign\Api\account;
 use Fangx\ESign\Api\FileTemplate;
+use Fangx\ESign\Contract\AccountApi;
 use Fangx\ESign\Contract\Client;
 use Fangx\ESign\Contract\FileTemplateApi;
 use Illuminate\Support\ServiceProvider;
@@ -26,13 +28,14 @@ class ESignServiceProvider extends ServiceProvider
         $this->app->singleton(Client::class, function () {
             return new ESignClient(config('esign', [
                 'host' => 'https://smlopenapi.esign.cn',
-                'app_id' => '4438777412',
-                'secret' => '7c5b1cdddc0c61704d26a9882905f539',
+                'app_id' => '',
+                'secret' => '',
             ]));
         });
 
         // 绑定 API 及其对应的实现
         $this->app->singleton(FileTemplateApi::class, FileTemplate::class);
+        $this->app->singleton(AccountApi::class,account::class);
     }
 
     public function boot()
