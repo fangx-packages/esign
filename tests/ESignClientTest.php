@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Fangx\Tests;
 
+use Fangx\ESign\Api\FileTemplate;
+use Fangx\ESign\Contract\Client;
+use Fangx\ESign\Contract\FileTemplateApi;
 use Fangx\ESign\ESign;
 use Fangx\ESign\ESignClient;
-use GuzzleHttp\Exception\RequestException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,6 +25,30 @@ use PHPUnit\Framework\TestCase;
  */
 class ESignClientTest extends TestCase
 {
+    // 每个测试执行之前都自动执行的方法
+    protected function setUp(): void
+    {
+        app()->singleton(Client::class, function () {
+            return new ESignClient([
+                'host' => 'https://openapi.esign.cn',
+                'app_id' => '',
+                'secret' => '',
+            ]);
+        });
+
+        // 绑定 API 及其对应的实现
+        app()->singleton(FileTemplateApi::class, FileTemplate::class);
+    }
+
+    public function testDi()
+    {
+        /** @var ESign $esign */
+        $esign = app(ESign::class);
+
+        $this->assertInstanceOf(FileTemplateApi::class, $esign->fileTemplateApi());
+        $this->assertEquals(FileTemplate::class, get_class($esign->fileTemplateApi()));
+    }
+
     public function testGetAccessToken()
     {
         //$client = $this->getClient();
@@ -55,14 +81,5 @@ class ESignClientTest extends TestCase
         //dump($upload, $response->getBody()->getContents());
 
         $this->assertTrue(true);
-    }
-
-    private function getClient()
-    {
-        return new ESignClient([
-            'host' => 'https://smlopenapi.esign.cn',
-            'app_id' => '',
-            'secret' => '',
-        ]);
     }
 }

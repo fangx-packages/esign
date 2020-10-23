@@ -32,11 +32,11 @@ class ESign
 
     public function __call($name, $arguments)
     {
-        if (class_exists($classname = '\\Fangx\\ESign\\Contract\\' . ucfirst($name))) {
+        if (interface_exists($classname = 'Fangx\\ESign\\Contract\\' . ucfirst($name))) {
             // 直接从 Laravel 容器中获取这个对象, 容器自动回实例化, 并实现对应的依赖注入
             return app($classname);
         }
 
-        throw new \Exception(sprintf('Call to undefined method [%s]', $classname));
+        throw new \Exception(sprintf('Call to undefined method [%s]', $name));
     }
 }
