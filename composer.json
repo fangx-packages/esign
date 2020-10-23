@@ -19,7 +19,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan": "^0.12.50",
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "8.5"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +33,7 @@
     },
     "scripts": {
         "cs-fix": "php-cs-fixer fix $1",
-        "test": "./vendor/bin/phpunit -c phpunit.xml --color=always"
+        "test": "phpunit -c phpunit.xml --color=always"
     },
     "extra": {
         "laravel": {

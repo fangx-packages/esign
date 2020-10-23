@@ -25,9 +25,9 @@ class ESignServiceProvider extends ServiceProvider
         // @see https://learnku.com/docs/laravel/8.x/providers/9362
         $this->app->singleton(Client::class, function () {
             return new ESignClient(config('esign', [
-                'host' => 'https://openapi.esign.cn',
-                'app_id' => '',
-                'secret' => '',
+                'host' => 'https://smlopenapi.esign.cn',
+                'app_id' => '4438777412',
+                'secret' => '7c5b1cdddc0c61704d26a9882905f539',
             ]));
         });
 
