@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  */
-class ESignClientTest extends TestCase
+class ESignTest extends TestCase
 {
     // 每个测试执行之前都自动执行的方法
     protected function setUp(): void
