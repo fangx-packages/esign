@@ -13,20 +13,26 @@ declare(strict_types=1);
 
 namespace Fangx\ESign;
 
+use Fangx\ESign\Api\FileTemplate;
 use Fangx\ESign\Contract\Client;
+use Fangx\ESign\Contract\FileTemplateApi;
 use Illuminate\Support\ServiceProvider;
 
 class ESignServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind(Client::class, function () {
+        // @see https://learnku.com/docs/laravel/8.x/providers/9362
+        $this->app->singleton(Client::class, function () {
             return new ESignClient(config('esign', [
                 'host' => 'https://openapi.esign.cn',
                 'app_id' => '',
                 'secret' => '',
             ]));
         });
+
+        // 绑定 API 及其对应的实现
+        $this->app->singleton(FileTemplateApi::class, FileTemplate::class);
     }
 
     public function boot()
