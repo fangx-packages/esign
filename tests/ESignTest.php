@@ -15,9 +15,11 @@ namespace Fangx\Tests;
 
 use Fangx\ESign\Api\account;
 use Fangx\ESign\Api\FileTemplate;
+use Fangx\ESign\Api\IdentityVerified;
 use Fangx\ESign\Contract\AccountApi;
 use Fangx\ESign\Contract\Client;
 use Fangx\ESign\Contract\FileTemplateApi;
+use Fangx\ESign\Contract\IdentityVerifiedApi;
 use Fangx\ESign\ESign;
 use Fangx\ESign\ESignClient;
 use PHPUnit\Framework\TestCase;
@@ -33,14 +35,15 @@ class ESignTest extends TestCase
         app()->singleton(Client::class, function () {
             return new ESignClient([
                 'host' => 'https://smlopenapi.esign.cn',
-                'app_id' => '',
-                'secret' => '',
+                'app_id' => '4438777412',
+                'secret' => '7c5b1cdddc0c61704d26a9882905f539',
             ]);
         });
 
         // 绑定 API 及其对应的实现
         app()->singleton(FileTemplateApi::class, FileTemplate::class);
         app()->singleton(AccountApi::class,account::class);
+        app()->singleton(IdentityVerifiedApi::class,IdentityVerified::class);
     }
 
     public function testDi()
@@ -105,6 +108,17 @@ class ESignTest extends TestCase
 //        $personAccountInfo = $eSign->accountApi()->queryPersonByAccount('');
 //
 //        dump($personAccountInfo);
+
+        $this->assertTrue(true);
+    }
+
+    public function testGetPersonVerifyUrl()
+    {
+        $eSign = app(ESign::class);
+
+        $personUrl = $eSign->identityVerifiedApi()->getPersonIdentityAuthUrl();
+
+        dump($personUrl);
 
         $this->assertTrue(true);
     }

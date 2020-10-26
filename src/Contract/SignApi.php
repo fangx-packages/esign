@@ -11,4 +11,14 @@ interface SignApi
     public function startSignFlow($flowId);
 
     public function revokeSignFlow($flowId,$operatorId = null,$revokeReason = "撤销");
+
+    public function addDocument($flowId,$fileId,$encryption = 0, $fileName = null,$filePassword = null);
+
+    public function addHandSign($flowId,$fileId,$signerAccountId,$order,$signType = 0,$authorizedAccountId = null,$actorIndentityType = null);
+
+    public function querySignFields($flowId,$accountId = null,$signFieldIds = null);
+
+    public function rushSign($flowId, $accountId = null,$noticeTypes = null,$rushSignAccountId = null);
+
+    public function getExecuteUrl($flowId,$accountId,$organizeId,$urlType = 0);
 }
