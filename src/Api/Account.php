@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Fangx's Packages
+ * @link     https://nfangxu.com
+ * @document https://pkg.nfangxu.com
+ * @contact  nfangxu@gmail.com
+ * @author   nfangxu
+ * @license  https://pkg.nfangxu.com/license
+ */
 
 namespace Fangx\ESign\Api;
 
-
-use Fangx\ESign\Contract\AccountApi;
 use Fangx\ESign\Contract\Client;
 
-class Account implements AccountApi
+class Account
 {
     protected $client;
 
@@ -17,7 +25,7 @@ class Account implements AccountApi
     }
 
     /**
-     * 创建个人账户
+     * 创建个人账户.
      *
      * @param $thirdPartyUserId
      * @param $name
@@ -29,7 +37,7 @@ class Account implements AccountApi
      */
     public function createPersonAccount($thirdPartyUserId, $name, $idType, $idNumber, $mobile = null, $email = null)
     {
-        $url = "/v1/accounts/createByThirdPartyUserId";
+        $url = '/v1/accounts/createByThirdPartyUserId';
 
         $body = [
             'thirdPartyUserId' => $thirdPartyUserId,
@@ -41,7 +49,6 @@ class Account implements AccountApi
         ];
 
         return $this->client->request('post', $url, $body);
-
     }
 
     public function queryPersonByAccount($accountId)
@@ -50,10 +57,9 @@ class Account implements AccountApi
         return $this->client->request('get', $url, []);
     }
 
-
     public function createOrganizeAccount($thirdPartyUserId, $creatorId, $name, $idType, $idNumber, $orgLegalIdNumber = null, $orgLegalName = null)
     {
-        $url = "/v1/organizations/createByThirdPartyUserId";
+        $url = '/v1/organizations/createByThirdPartyUserId';
 
         $body = [
             'thirdPartyUserId' => $thirdPartyUserId,

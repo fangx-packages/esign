@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Fangx's Packages
+ * @link     https://nfangxu.com
+ * @document https://pkg.nfangxu.com
+ * @contact  nfangxu@gmail.com
+ * @author   nfangxu
+ * @license  https://pkg.nfangxu.com/license
+ */
 
 namespace Fangx\ESign\Api;
 
-
 use Fangx\ESign\Contract\Client;
-use Fangx\ESign\Contract\SealApi;
 
-class Seal implements SealApi
+class Seal
 {
     protected $client;
 
@@ -25,11 +33,10 @@ class Seal implements SealApi
             'color' => $color,
             'type' => $type,
             'height' => $height,
-            'width' => $width
+            'width' => $width,
         ];
 
         return $this->client->request('post', $url, $body);
-
     }
 
     public function createOrganizeTemplate($orgId, $color, $type, $central, $alias = null, $height = null, $width = null, $htext = null, $qtext = null)
@@ -48,7 +55,6 @@ class Seal implements SealApi
         ];
 
         return $this->client->request('post', $url, $body);
-
     }
 
     public function queryPersonSeals($accountId, $offset, $size)
@@ -60,7 +66,7 @@ class Seal implements SealApi
             'size' => $size,
         ];
 
-        return $this->client->request('get',$url,$params);
+        return $this->client->request('get', $url, $params);
     }
 
     public function queryOrganizeSeals($orgId, $offset, $size)
@@ -72,20 +78,20 @@ class Seal implements SealApi
             'size' => $size,
         ];
 
-        return $this->client->request('get',$url,$params);
+        return $this->client->request('get', $url, $params);
     }
 
     public function deletePersonSeal($accountId, $sealId)
     {
         $url = "/v1/accounts/{$accountId}/seals/{$sealId}";
 
-        return $this->client->request('delete',$url,[]);
+        return $this->client->request('delete', $url, []);
     }
 
     public function deleteOrganizeSeal($orgId, $sealId)
     {
         $url = "/v1/organizations/{$orgId}/seals/{$sealId}";
 
-        return $this->client->request('delete',$url,[]);
+        return $this->client->request('delete', $url, []);
     }
 }

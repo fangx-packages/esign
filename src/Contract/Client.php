@@ -15,7 +15,9 @@ namespace Fangx\ESign\Contract;
 
 interface Client
 {
-    public function getAccessToken(): string;
+    public function request(string $method, string $uri, array $data): array;
 
-    public function request($method, $uri, $data): array;
+    public function upload(string $url, array $headers, string $body): array;
+
+    public function config(string $key);
 }

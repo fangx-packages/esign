@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Fangx's Packages
+ * @link     https://nfangxu.com
+ * @document https://pkg.nfangxu.com
+ * @contact  nfangxu@gmail.com
+ * @author   nfangxu
+ * @license  https://pkg.nfangxu.com/license
+ */
 
 namespace Fangx\ESign\Api;
 
-
 use Fangx\ESign\Contract\Client;
-use Fangx\ESign\Contract\SignApi;
 
-class Sign implements SignApi
+class Sign
 {
     protected $client;
 
@@ -17,7 +25,7 @@ class Sign implements SignApi
     }
 
     /**
-     * 签署流程的创建
+     * 签署流程的创建.
      *
      * @param $businessScene
      * @param false $autoArchive
@@ -35,7 +43,7 @@ class Sign implements SignApi
      */
     public function createSignFlow($businessScene, $autoArchive = false, $noticeDeveloperUrl = null, $noticeType = 1, $redirectUrl = null, $signPlatform = 2, $redirectDelayTime = 3, $contractValidity = null, $contractRemind = null, $signValidity = null, $initiatorAccountId = null, $initiatorAuthorizedAccountId = null)
     {
-        $url = "/v1/signflows";
+        $url = '/v1/signflows';
 
         $body = [
             'autoArchive' => $autoArchive,
@@ -51,14 +59,14 @@ class Sign implements SignApi
             'contractRemind' => $contractRemind,
             'signValidity' => $signValidity,
             'initiatorAccountId' => $initiatorAccountId,
-            'initiatorAuthorizedAccountId' => $initiatorAuthorizedAccountId
+            'initiatorAuthorizedAccountId' => $initiatorAuthorizedAccountId,
         ];
 
         return $this->client->request('post', $url, $body);
     }
 
     /**
-     * 查询签署流程
+     * 查询签署流程.
      *
      * @param $flowId
      * @return array
@@ -71,7 +79,7 @@ class Sign implements SignApi
     }
 
     /**
-     * 签署流程开启
+     * 签署流程开启.
      * @param $flowId
      * @return array
      */
@@ -80,7 +88,6 @@ class Sign implements SignApi
         $url = "/v1/signflows/{$flowId}/start";
 
         return $this->client->request('put', $url, []);
-
     }
 
     /**
@@ -91,7 +98,7 @@ class Sign implements SignApi
      * @param string $revokeReason
      * @return array
      */
-    public function revokeSignFlow($flowId, $operatorId = null, $revokeReason = "撤销")
+    public function revokeSignFlow($flowId, $operatorId = null, $revokeReason = '撤销')
     {
         $url = "/v1/signflows/{$flowId}/revoke";
 
@@ -104,7 +111,7 @@ class Sign implements SignApi
     }
 
     /**
-     * 流程文档添加
+     * 流程文档添加.
      *
      * @param $flowId
      * @param $fileId
@@ -126,11 +133,11 @@ class Sign implements SignApi
             ],
         ];
 
-        return $this->client->request('post',$url,$body);
+        return $this->client->request('post', $url, $body);
     }
 
     /**
-     * 添加手动盖章签署区
+     * 添加手动盖章签署区.
      *
      * @param $flowId
      * @param $fileId
@@ -152,15 +159,15 @@ class Sign implements SignApi
                 'authorizedAccountId' => $authorizedAccountId,
                 'actorIndentityType' => $actorIndentityType,
                 'order' => $order,
-                'signType' => $signType
+                'signType' => $signType,
             ],
         ];
 
-        return $this->client->request('post',$url,$body);
+        return $this->client->request('post', $url, $body);
     }
 
     /**
-     * 查询签署区列表
+     * 查询签署区列表.
      *
      * @param $flowId
      * @param null $accountId
@@ -176,11 +183,11 @@ class Sign implements SignApi
             'signfieldIds' => $signFieldIds,
         ];
 
-        return $this->client->request('get',$url,$params);
+        return $this->client->request('get', $url, $params);
     }
 
     /**
-     * 流程签署人催签
+     * 流程签署人催签.
      * @param $flowId 流程id
      * @param null $accountId 催签人账户id
      * @param null $noticeTypes 通知方式，逗号分割，1-短信，2-邮件 3-支付宝 4-钉钉，默认按照走流程设置
@@ -194,10 +201,10 @@ class Sign implements SignApi
         $body = [
             'accountId' => $accountId,
             'noticeTypes' => $noticeTypes,
-            'rushsignAccountId' => $rushSignAccountId
+            'rushsignAccountId' => $rushSignAccountId,
         ];
 
-        return $this->client->request('put',$url,$body);
+        return $this->client->request('put', $url, $body);
     }
 
     /**
@@ -206,7 +213,7 @@ class Sign implements SignApi
      * @param $flowId 流程id
      * @param $accountId  	签署人账号id
      * @param $organizeId 默认为空，返回的任务链接仅包含签署人本人需要签署的任务； 传入0，则返回的任务链接包含签署人“本人+所有代签机构”的签署任务；  传入指定机构id，则返回的任务链接包含签署人“本人+指定代签机构”的签署任务
-     * @param int $urlType 	链接类型: 0-签署链接;1-预览链接;默认0
+     * @param int $urlType 链接类型: 0-签署链接;1-预览链接;默认0
      * @return array
      */
     public function getExecuteUrl($flowId, $accountId, $organizeId, $urlType = 0)
@@ -216,10 +223,9 @@ class Sign implements SignApi
         $params = [
             'accountId' => $accountId,
             'organizeId' => $organizeId,
-            'urlType' => $urlType
+            'urlType' => $urlType,
         ];
 
-        return $this->client->request('get',$url,$params);
+        return $this->client->request('get', $url, $params);
     }
-
 }

@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Fangx\ESign\Api;
 
 use Fangx\ESign\Contract\Client;
-use Fangx\ESign\Contract\FileTemplateApi;
 
-class FileTemplate implements FileTemplateApi
+class FileTemplate
 {
     protected $client;
 
@@ -25,7 +24,7 @@ class FileTemplate implements FileTemplateApi
         $this->client = $client;
     }
 
-    public function upload($uploadUrl, $filepath)
+    public function upload(string $uploadUrl, string $filepath)
     {
         return $this->client->upload($uploadUrl, [
             'Content-MD5' => $this->getContentMD5($filepath),
@@ -33,11 +32,10 @@ class FileTemplate implements FileTemplateApi
         ], file_get_contents($filepath));
     }
 
-    public function getUploadUrl($filepath)
+    public function getUploadUrl(string $filepath)
     {
         if (! file_exists($filepath)) {
-            // @TODO 这里应该抛出一个异常
-            return null;
+            throw new \RuntimeException();
         }
 
         return $this->client->request('post', '/v1/files/getUploadUrl', [

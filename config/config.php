@@ -12,8 +12,8 @@ declare(strict_types=1);
  */
 
 return [
-//    'host' => env('E_SIGN_HOST', 'https://openapi.esign.cn'),
+    //    'host' => env('E_SIGN_HOST', 'https://openapi.esign.cn'),
     'host' => env('E_SIGN_HOST', 'https://smlopenapi.esign.cn'),
-    'app_id' => env('E_SIGN_APP_ID',''),
-    'secret' => env('E_SIGN_SECRET',''),
+    'app_id' => env('E_SIGN_APP_ID', ''),
+    'secret' => env('E_SIGN_SECRET', ''),
 ];

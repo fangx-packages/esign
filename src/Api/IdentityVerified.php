@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Fangx's Packages
+ * @link     https://nfangxu.com
+ * @document https://pkg.nfangxu.com
+ * @contact  nfangxu@gmail.com
+ * @author   nfangxu
+ * @license  https://pkg.nfangxu.com/license
+ */
 
 namespace Fangx\ESign\Api;
 
-
 use Fangx\ESign\Contract\Client;
-use Fangx\ESign\Contract\IdentityVerifiedApi;
 
-class IdentityVerified implements IdentityVerifiedApi
+class IdentityVerified
 {
     protected $client;
 
@@ -25,19 +33,19 @@ class IdentityVerified implements IdentityVerifiedApi
      * @param null $redirectUrl
      * @return array
      */
-    public function getPersonIdentityAuthUrl($authType = "PSN_FACEAUTH_BYURL", $contextId = null, $notifyUrl = null, $redirectUrl = null)
+    public function getPersonIdentityAuthUrl($authType = 'PSN_FACEAUTH_BYURL', $contextId = null, $notifyUrl = null, $redirectUrl = null)
     {
-        $url = "/v2/identity/auth/web/indivAuthUrl";
+        $url = '/v2/identity/auth/web/indivAuthUrl';
         $body = [
             'authType' => $authType,
             'contextInfo' => [
                 'contextId' => $contextId,
                 'notifyUrl' => $notifyUrl,
-                'redirectUrl' => $redirectUrl
-            ]
+                'redirectUrl' => $redirectUrl,
+            ],
         ];
 
-        return $this->client->request('post',$url,$body);
+        return $this->client->request('post', $url, $body);
     }
 
     /**
@@ -49,24 +57,24 @@ class IdentityVerified implements IdentityVerifiedApi
      * @param null $redirectUrl
      * @return array
      */
-    public function getOrganizeIdentityAuthUrl($authType = "ORG_ZM_AUTHORIZE", $contextId = null, $notifyUrl = null, $redirectUrl = null)
+    public function getOrganizeIdentityAuthUrl($authType = 'ORG_ZM_AUTHORIZE', $contextId = null, $notifyUrl = null, $redirectUrl = null)
     {
-        $url = "/v2/identity/auth/web/orgAuthUrl";
+        $url = '/v2/identity/auth/web/orgAuthUrl';
 
         $body = [
             'authType' => $authType,
             'contextInfo' => [
                 'contextId' => $contextId,
                 'notifyUrl' => $notifyUrl,
-                'redirectUrl' => $redirectUrl
-            ]
+                'redirectUrl' => $redirectUrl,
+            ],
         ];
 
-        return $this->client->request('post',$url,$body);
+        return $this->client->request('post', $url, $body);
     }
 
     /**
-     * 查询认证主流程明细
+     * 查询认证主流程明细.
      *
      * @param $flowId
      * @return array
@@ -75,14 +83,13 @@ class IdentityVerified implements IdentityVerifiedApi
     {
         $url = "/v2/identity/auth/api/common/{$flowId}/outline";
 
-        return $this->client->request('get',$url,[]);
+        return $this->client->request('get', $url, []);
     }
 
     public function queryIdentityDetail($flowId)
     {
         $url = "/v2/identity/auth/api/common/{$flowId}/detail";
 
-        return $this->client->request('get',$url,[]);
+        return $this->client->request('get', $url, []);
     }
-
 }
