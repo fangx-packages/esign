@@ -100,7 +100,7 @@ class ESignClient implements Client
         $data = json_decode((string)$body, true) ?: [];
 
         if (($data['code'] ?? null) !== 0) {
-            ESignException::touch($response);
+            ESignException::touch($response,$data);
         }
 
         return $data['data'];

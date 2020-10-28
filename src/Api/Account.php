@@ -27,7 +27,7 @@ class Account implements AccountApi
      * @param null $email
      * @return array
      */
-    public function createPersonAccount($thirdPartyUserId, $name, $idType, $idNumber, $mobile = null, $email = null)
+    public function createPersonAccount($thirdPartyUserId, $name = null, $idType =null, $idNumber = null, $mobile = null, $email = null)
     {
         $url = "/v1/accounts/createByThirdPartyUserId";
 
@@ -51,13 +51,13 @@ class Account implements AccountApi
     }
 
 
-    public function createOrganizeAccount($thirdPartyUserId, $creatorId, $name, $idType, $idNumber, $orgLegalIdNumber = null, $orgLegalName = null)
+    public function createOrganizeAccount($thirdPartyUserId,$creatorAccountId,$name = null,$idType ="CRED_ORG_USCC",$idNumber = null, $orgLegalIdNumber = null, $orgLegalName = null)
     {
         $url = "/v1/organizations/createByThirdPartyUserId";
 
         $body = [
             'thirdPartyUserId' => $thirdPartyUserId,
-            'creator' => $creatorId,
+            'creator' => $creatorAccountId,
             'name' => $name,
             'idType' => $idType,
             'idNumber' => $idNumber,

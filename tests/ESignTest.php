@@ -35,8 +35,8 @@ class ESignTest extends TestCase
         app()->singleton(Client::class, function () {
             return new ESignClient([
                 'host' => 'https://smlopenapi.esign.cn',
-                'app_id' => '4438777412',
-                'secret' => '7c5b1cdddc0c61704d26a9882905f539',
+                'app_id' => '',
+                'secret' => '',
             ]);
         });
 
@@ -119,6 +119,32 @@ class ESignTest extends TestCase
         $personUrl = $eSign->identityVerifiedApi()->getPersonIdentityAuthUrl();
 
         dump($personUrl);
+
+        $this->assertTrue(true);
+    }
+
+    public function testGetPersonVerifyUrlbyAccountId()
+    {
+        $eSign = app(ESign::class);
+        // 创建e签宝个人账号
+//        $name = "";
+//        $thirdPartyUserId = "esign_service_2";
+        $thirdPartyOrgId = "esign_service_orign_1";
+//        $accountId = $eSign->accountApi()->createPersonAccount($thirdPartyUserId,$name);
+//        dump($accountId);
+//        $accountId = "4973242990b0491ab6bd6abc8335a7ff";
+//        $orgId = $eSign->accountApi()->createOrganizeAccount($thirdPartyOrgId,$accountId);
+        $orgId = 'fe4235c2d78845bbb8267052bdf0e6d6';
+//        dump($orgId);
+//        $url = $eSign->identityVerifiedApi()->getPersonIdentityAuthUrlByAccountId($accountId);
+//        dump($url);
+//        $queryInfo = $eSign->accountApi()->queryPersonByAccount($orgId);
+//        dump($queryInfo);
+//        $queryOrgInfo= $eSign->accountApi()->queryOrganizeByAccount($orgId);
+//        dump($queryOrgInfo);
+
+        $orgUrl = $eSign->identityVerifiedApi()->getOrganizeIdentityAuthUrlByAccountId($orgId,$accountId);
+        dump($orgUrl);
 
         $this->assertTrue(true);
     }

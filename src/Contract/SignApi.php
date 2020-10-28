@@ -21,4 +21,5 @@ interface SignApi
     public function rushSign($flowId, $accountId = null,$noticeTypes = null,$rushSignAccountId = null);
 
     public function getExecuteUrl($flowId,$accountId,$organizeId,$urlType = 0);
+
 }

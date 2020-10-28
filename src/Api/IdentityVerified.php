@@ -65,6 +65,36 @@ class IdentityVerified implements IdentityVerifiedApi
         return $this->client->request('post',$url,$body);
     }
 
+    public function getPersonIdentityAuthUrlByAccountId($accountId, $authType = "PSN_FACEAUTH_BYURL", $contextId = null, $notifyUrl = null, $redirectUrl = null)
+    {
+        $url = "/v2/identity/auth/web/{$accountId}/indivIdentityUrl";
+        $body = [
+            'authType' => $authType,
+            'contextInfo' => [
+                'contextId' => $contextId,
+                'notifyUrl' => $notifyUrl,
+                'redirectUrl' => $redirectUrl
+            ]
+        ];
+        return $this->client->request('post',$url,$body);
+    }
+
+    public function getOrganizeIdentityAuthUrlByAccountId($accountId,$agentAccountId,$authType = "ORG_ZM_AUTHORIZE",$contextId = null,$notifyUrl = null,$redirectUrl = null)
+    {
+        $url = "/v2/identity/auth/web/{$accountId}/orgIdentityUrl";
+
+        $body = [
+            'agentAccountId' => $agentAccountId,
+            'authType' => $authType,
+            'contextInfo' => [
+                'contextId' => $contextId,
+                'notifyUrl' => $notifyUrl,
+                'redirectUrl' => $redirectUrl
+            ]
+        ];
+        return $this->client->request('post',$url,$body);
+    }
+
     /**
      * 查询认证主流程明细
      *
