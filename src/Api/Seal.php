@@ -91,7 +91,7 @@ class Seal implements SealApi
 
     public function createSealByImage($accountId, $data, $transparentFlag = false, $type = "BASE64")
     {
-        $url = " /v1/accounts/{$accountId}/seals/image";
+        $url = "/v1/accounts/{$accountId}/seals/image";
 
         $body = [
             "data" => preg_replace('/^data:image\/\w+;base64,/','',$data), //base64格式字符串正则匹配去除格式前缀
