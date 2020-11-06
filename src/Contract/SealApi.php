@@ -17,4 +17,5 @@ interface SealApi
 
     public function deleteOrganizeSeal($orgId,$sealId);
 
+    public function createSealByImage($accountId,$data,$transparentFlag = false,$type = "BASE64");
 }
