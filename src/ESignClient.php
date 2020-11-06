@@ -103,6 +103,6 @@ class ESignClient implements Client
             ESignException::touch($response,$data);
         }
 
-        return $data['data'];
+        return $data['data'] ?:[];
     }
 }
