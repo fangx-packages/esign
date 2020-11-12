@@ -33,7 +33,7 @@ class Sign implements SignApi
      * @param null $initiatorAuthorizedAccountId
      * @return array
      */
-    public function createSignFlow($businessScene, $autoArchive = false, $noticeDeveloperUrl = null, $noticeType = 1, $redirectUrl = null, $signPlatform = 2, $redirectDelayTime = 3, $contractValidity = null, $contractRemind = null, $signValidity = null, $initiatorAccountId = null, $initiatorAuthorizedAccountId = null)
+    public function createSignFlow($businessScene,$noticeDeveloperUrl = null, $signValidity = null, $autoArchive = false,  $noticeType = 1, $redirectUrl = null, $signPlatform = 2, $redirectDelayTime = 3, $contractValidity = null, $contractRemind = null,$initiatorAccountId = null, $initiatorAuthorizedAccountId = null)
     {
         $url = "/v1/signflows";
 
@@ -119,10 +119,13 @@ class Sign implements SignApi
 
         $body = [
             'docs' => [
-                'fileId' => $fileId,
-                'encryption' => $encryption,
-                'fileName' => $fileName,
-                'filePassword' => $filePassword,
+                [
+                    'fileId' => $fileId,
+                    'encryption' => $encryption,
+                    'fileName' => $fileName,
+                    'filePassword' => $filePassword,
+                ]
+
             ],
         ];
 
@@ -147,12 +150,15 @@ class Sign implements SignApi
 
         $body = [
             'signfields' => [
-                'fileId' => $fileId,
-                'signerAccountId' => $signerAccountId,
-                'authorizedAccountId' => $authorizedAccountId,
-                'actorIndentityType' => $actorIndentityType,
-                'order' => $order,
-                'signType' => $signType
+                [
+                    'fileId' => $fileId,
+                    'signerAccountId' => $signerAccountId,
+                    'authorizedAccountId' => $authorizedAccountId,
+                    'actorIndentityType' => $actorIndentityType,
+                    'order' => $order,
+                    'signType' => $signType
+                ]
+
             ],
         ];
 

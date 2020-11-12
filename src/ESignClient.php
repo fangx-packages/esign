@@ -70,7 +70,9 @@ class ESignClient implements Client
         if (strtolower($method) === 'get') {
             $options['query'] = http_build_query($data);
         } else {
-            $options['body'] = json_encode($data);
+            if (!empty($data)){
+                $options['body'] = json_encode($data);
+            }
         }
 
         return $this->response($this->client->request($method, $uri, $options));

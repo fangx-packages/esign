@@ -4,7 +4,7 @@ namespace Fangx\ESign\Contract;
 
 interface AccountApi
 {
-    public function createPersonAccount($thirdPartyUserId, $name = null, $idType =null, $idNumber = null, $mobile = null, $email = null);
+    public function createPersonAccount($thirdPartyUserId, $mobile = null, $name = null, $idType =null, $idNumber = null, $email = null);
 
     public function queryPersonByAccount($accountId);
 
