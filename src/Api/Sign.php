@@ -228,4 +228,10 @@ class Sign implements SignApi
         return $this->client->request('get',$url,$params);
     }
 
+    public function signDocumentDownload($flowId)
+    {
+        $url = "/v1/signflows/{$flowId}/documents";
+
+        return $this->client->request('get', $url, []);
+    }
 }

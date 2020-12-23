@@ -22,4 +22,6 @@ interface SignApi
 
     public function getExecuteUrl($flowId,$accountId,$organizeId,$urlType = 0);
 
+    public function signDocumentDownload($flowId);
+
 }
