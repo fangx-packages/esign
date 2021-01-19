@@ -50,6 +50,20 @@ class Account implements AccountApi
         return $this->client->request('get', $url, []);
     }
 
+    public function updatePersonByAccountId($accountId, $mobile = null, $name = null, $idType = null, $idNumber = null, $email = null)
+    {
+        $url = "/v1/accounts/{$accountId}";
+
+        $body = [
+            'name' => $name,
+            'idType' => $idType,
+            'idNumber' => $idNumber,
+            'mobile' => $mobile,
+            'email' => $email,
+        ];
+
+        return $this->client->request('put', $url, $body);
+    }
 
     public function createOrganizeAccount($thirdPartyUserId, $creatorAccountId, $name = null, $idType = "CRED_ORG_USCC", $idNumber = null, $orgLegalIdNumber = null, $orgLegalName = null)
     {
@@ -72,5 +86,20 @@ class Account implements AccountApi
     {
         $url = "/v1/organizations/{$orgId}";
         return $this->client->request('get', $url, []);
+    }
+
+    public function updateOrganizeByAccountId($orgId, $name = null, $idType = null, $idNumber = null, $orgLegalIdNumber = null, $orgLegalName = null)
+    {
+        $url = "/v1/organizations/{$orgId}";
+
+        $body = [
+            'name' => $name,
+            'idType' => $idType,
+            'idNumber' => $idNumber,
+            'orgLegalIdNumber' => $orgLegalIdNumber,
+            'orgLegalName' => $orgLegalName,
+        ];
+
+        return $this->client->request('put', $url, $body);
     }
 }
