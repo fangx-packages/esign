@@ -92,6 +92,7 @@ class ESignClient implements Client
             'X-Tsign-Open-App-Id' => $this->config['app_id'],
             'Content-Type' => 'application/json; charset=UTF-8',
             'X-Tsign-Open-Token' => $this->getAccessToken(),
+            'X-Tsign-Dns-App-Id' => $this->config['app_id'],
         ];
     }
 
